@@ -4,8 +4,6 @@ import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 import Alert from 'react-bootstrap/Alert';
 import axios from 'axios';
-import Storage from '../storage.js';
-const storage = new Storage()
 
 export default class Login extends Component {
   state = {
@@ -55,6 +53,7 @@ export default class Login extends Component {
                 //res is stored in axios config if token is present
                 this.setState({error: ''})
                 setUserData({firstName: firstName, lastName: lastName, id: id, role: role, loggedIn: true})
+                document.getElementById('storyCreateLink').click()
               }).catch(e => {
                 this.setState({error: e.message})
               })

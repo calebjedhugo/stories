@@ -1,6 +1,6 @@
 export default class Storage {
   set userData(value){
-    window.localStorage.setItem('userData', value ? JSON.stringify(value) : undefined)
+    window.localStorage.setItem('userData', value ? JSON.stringify(value) : null)
   }
 
   get userData(){

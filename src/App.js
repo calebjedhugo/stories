@@ -1,9 +1,21 @@
 import React, {Component} from 'react';
+import Navbar from 'react-bootstrap/Navbar';
+import Nav from 'react-bootstrap/Nav';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
+
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+
 import Login from './components/Login'
 import StoryCreate from './components/StoryCreate'
+import StoryList from './components/StoryList'
+import Welcome from './components/Welcome'
 
 import Storage from './storage.js';
 const storage = new Storage()
@@ -45,12 +57,57 @@ axios.interceptors.response.use((res) => {
 })
 
 class App extends Component {
-  state = {
-    loggedIn: Boolean(storage.userData),
-    role: '',
-    firstName: '',
-    lastName: '',
-    id: null,
+  state = this.initState
+
+  get initState(){
+    return {
+      loggedIn: Boolean(storage.userData),
+      role: '',
+      firstName: '',
+      lastName: '',
+      id: null
+    }
+  }
+
+  componentDidMount(){
+    const {loggedIn} = this.state
+    if(loggedIn){
+      this.setState(storage.userData)
+    }
+  }
+
+  get main(){
+    return (
+      <Router>
+        <div>
+          <Navbar bg="light" expand="lg">
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse id="basic-navbar-nav">
+              <Nav className="mr-auto">
+                <Link to="/">Home</Link>
+                <Link id={'storyCreateLink'} to="/storyCreate">Create Story</Link>
+                <Link id={'storyListLink'} to="/storyList">See Stories</Link>
+                <Link to="/" onClick={() => {
+                  storage.userData = undefined
+                  this.setState(this.initState)
+                }}>Log Out</Link>
+              </Nav>
+            </Navbar.Collapse>
+          </Navbar>
+          <Switch>
+            <Route path="/storyCreate">
+              <StoryCreate />
+            </Route>
+            <Route path="/storyList">
+              <StoryList />
+            </Route>
+            <Route path="/">
+            <Welcome {...this.state}/>
+            </Route>
+          </Switch>
+        </div>
+      </Router>
+    )
   }
 
   render() {
@@ -59,7 +116,7 @@ class App extends Component {
       <div className="App">
         {
           loggedIn ?
-            <StoryCreate /> :
+            this.main :
             <Login setUserData={userData => {
               this.setState({...userData})
             }}/>
