@@ -2,3 +2,16 @@
 .loginButton, .submitStory{
   float: right;
 }
+
+.sortingHeader {
+  background-color: yellow;
+  border-radius: 10px;
+}
+
+.cardTableContainer {
+  overflow-y: scroll;
+}
+
+th {
+  cursor: pointer;
+}

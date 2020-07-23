@@ -6,6 +6,7 @@ import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 import Alert from 'react-bootstrap/Alert';
 import InputGroup from 'react-bootstrap/InputGroup';
+import schema from './helpers/schema'
 
 export default class StoryCreate extends Component {
   state = {
@@ -19,38 +20,26 @@ export default class StoryCreate extends Component {
   }
 
   makeOptions = options => {
-    return options.map((elem, idx) => {
+    return [
+      {display: 'Select', value: ''},
+      ...options
+    ].map((elem, idx) => {
       return <option key={idx} value={elem.value}>{elem.display}</option>
     })
   }
 
   get typeOptions(){
-    return this.makeOptions(
-      [
-        {display: 'Select', value: ''},
-        {display: 'Enhancement', value: 'enhancement'},
-        {display: 'Bug Fix', value: 'bugfix'},
-        {display: 'Development', value: 'development'},
-        {display: 'QA', value: 'qa'}
-      ]
-    )
+    return this.makeOptions(schema.type)
   }
 
   get complexityOptions(){
-    return this.makeOptions(
-      [
-        {display: 'Select', value: ''},
-        {display: 'Low', value: 'low'},
-        {display: 'Mid', value: 'mid'},
-        {display: 'High', value: 'high'},
-      ]
-    )
+    return this.makeOptions(schema.complexity)
   }
 
   render(){
     const {summary, description, type, complexity, time, cost, error} = this.state
     return (
-      <Card className='loginForm'>
+      <Card className='storyCreate'>
         <Card.Body>
           <Card.Title>Create a Story</Card.Title>
           <Form>
