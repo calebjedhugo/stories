@@ -35,7 +35,7 @@ export default class Login extends Component {
             </Form.Group>
             <Form.Group controlId="adminCheckbox">
               <Form.Check type="checkbox" label="admin" value={admin} onChange={e => {
-                this.setState({admin: e.target.value})
+                this.setState({admin: e.target.checked})
               }}/>
             </Form.Group>
             {error ? <Alert variant='danger'>{error}</Alert> : null}
@@ -47,7 +47,7 @@ export default class Login extends Component {
               axios.post('signin', {
                 email: email,
                 password: password,
-                admin: admin
+                isAdmin: admin
               }).then(res => {
                 const {firstName, lastName, id, role} = res.data
                 //res is stored in axios config if token is present

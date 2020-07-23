@@ -12,6 +12,22 @@
   overflow-y: scroll;
 }
 
+.acceptStory {
+  float: left
+}
+
+.rejectStory {
+  float: right
+}
+
 th {
   cursor: pointer;
+}
+
+.acceptedRow {
+  color: green;
+}
+
+.rejectedRow {
+  color: red;
 }

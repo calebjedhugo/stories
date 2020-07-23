@@ -77,6 +77,7 @@ class App extends Component {
   }
 
   get main(){
+    const {role} = this.state
     return (
       <Router>
         <div>
@@ -96,13 +97,13 @@ class App extends Component {
           </Navbar>
           <Switch>
             <Route path="/storyCreate">
-              <StoryCreate />
+              <StoryCreate role={role} />
             </Route>
             <Route path="/storyList">
-              <StoryList />
+              <StoryList role={role} />
             </Route>
             <Route path="/">
-            <Welcome {...this.state}/>
+              <Welcome {...this.state} />
             </Route>
           </Switch>
         </div>

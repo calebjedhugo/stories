@@ -57,6 +57,7 @@ export default class StoryList extends Component {
 
   get tableBody(){
     const {by, reversed, type} = this.state
+    const {role} = this.props
     let orderedList = JSON.parse(JSON.stringify(this.state.list))
     orderedList.sort((a, b) => {
       if(by === 'cost' || by === 'id' || by === 'estimatedHrs') return Number(a[by]) - Number(b[by])
@@ -69,8 +70,15 @@ export default class StoryList extends Component {
     if(reversed) orderedList.reverse() //This could be optimized by reversing in the sort function.
     let trs = orderedList.map((elem, idx) => {
       if(elem.type === type || !type){
+        let className = elem.accapted === undefined ? '' : elem.accapted ? 'acceptedRow' : 'rejectedRow'
         return (
-          <tr>
+          <tr key={idx} className={className} onClick={() => {
+            if(role.toLowerCase() === 'admin'){
+              console.log('test')
+              document.getElementById('storyCreateLink').click()
+              window.history.pushState('', '', `${window.location.href}?id=${elem.id}`);
+            }
+          }}>
             {this.headers.map(header => {
               return <td key={header.value}>{elem[header.value]}</td>
             })}

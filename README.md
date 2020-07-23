@@ -1,3 +1,5 @@
+This application is designed to log into and consume the api for './api/v1/stories'. GET, GET (with /id), POST, and PATCH should all be available. PATCH should accept the single Boolean argument 'accepted'.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
