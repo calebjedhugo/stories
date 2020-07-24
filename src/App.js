@@ -85,10 +85,10 @@ class App extends Component {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="mr-auto">
-                <Link to="/">Home</Link>
-                <Link id={'storyCreateLink'} to="/storyCreate">Create Story</Link>
-                <Link id={'storyListLink'} to="/storyList">See Stories</Link>
-                <Link to="/" onClick={() => {
+                <Link className='nav-link' to="/">Home</Link>
+                <Link className='nav-link' id={'storyCreateLink'} to="/storyCreate">Create Story</Link>
+                <Link className='nav-link' id={'storyListLink'} to="/storyList">See Stories</Link>
+                <Link className='nav-link' to="/" onClick={() => {
                   storage.userData = undefined
                   this.setState(this.initState)
                 }}>Log Out</Link>

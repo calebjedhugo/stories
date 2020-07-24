@@ -1,4 +1,14 @@
-This application is designed to log into and consume the api for './api/v1/stories'. GET, GET (with /id), POST, and PATCH should all be available. PATCH should accept the single Boolean argument 'accepted'.
+This application is designed to log into and consume the api for './api/v1/stories'. GET, GET (with /id), POST, and PATCH should all be available.
+
+All UI components are in the src/components folder. Each file has a single default export and a single component.
+
+Accept/Reject for admins is handled in StoryCreate.js. If there is an ID in the URL params, the data is fetched and the fields disabled. The submit button is replaced with the admin buttons.
+
+Navigation is handled by react-router-dom. The result is that there is no page refreshing. It is a SPA that modifies the URL to provide the user with a way to navigate back to a specific program state using urls.
+
+All api calls are handle by axios. Tokens and userData are stored in browser storage so they can be used for subsequent api calls. This also keeps the user 'logged in' should they refresh or navigate away from the application.
+
+The helpers folder contains static data to populate dropdowns or is used in multiple locations in the application.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
